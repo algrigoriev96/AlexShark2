@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Подводный мир{% endblock %}</title>
+    <!-- Bootstrap 5 (сетка) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Шрифты: заголовки - Bebas Neue, текст - Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Морская цветовая палитра */
+        :root {
+            --deep-ocean: #0b3b4f;
+            --wave-blue: #2c7da0;
+            --coral: #ff7e67;
+            --sand: #f9e7c2;
+            --light-cyan: #d9f0f7;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(145deg, #cfefff 0%, #a8d8ea 100%);
+            color: #05314b;
+            line-height: 1.6;
+        }
+        /* Навбар с волнообразным градиентом */
+        .navbar-marine {
+            background: linear-gradient(90deg, #0b5e7e, #043b4e);
+            border-bottom: 3px solid #ffb347;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: #ffe0b5 !important;
+            text-shadow: 2px 2px 0 #006688;
+        }
+        .navbar-brand i {
+            color: #ffb347;
+            margin-right: 8px;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: #fff3e0 !important;
+            margin: 0 6px;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            border-bottom-color: #ffb347;
+            transform: translateY(-2px);
+        }
+        /* Кнопки */
+        .btn-outline-light {
+            border: 2px solid #ffb347;
+            color: #ffb347;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .btn-outline-light:hover {
+            background: #ffb347;
+            color: #043b4e;
+            transform: scale(1.02);
+        }
+        .btn-coral {
+            background: #ff7e67;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 22px;
+            font-weight: bold;
+            color: white;
+            transition: 0.2s;
+        }
+        .btn-coral:hover {
+            background: #ff5e42;
+            box-shadow: 0 5px 12px rgba(255,94,66,0.4);
+            transform: translateY(-2px);
+        }
+        /* Карточки новостей */
+        .card-shark {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 28px;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -10px rgba(0, 51, 68, 0.2);
+            transition: 0.25s;
+        }
+        .card-shark:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -12px #006088;
+        }
+        .card-shark .card-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            color: #0b5e7e;
+        }
+        .btn-read {
+            background: #2c7da0;
+            border-radius: 40px;
+            color: white;
+            padding: 5px 20px;
+            font-weight: 500;
+            border: none;
+        }
+        .btn-read:hover {
+            background: #1f5e7a;
+            color: #ffdcb5;
+        }
+        /* Список всех новостей (на странице /news) */
+        .list-group-item-water {
+            background: #fef9ef;
+            border-left: 8px solid #ff7e67;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            padding: 18px 24px;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .list-group-item-water:hover {
+            transform: translateX(10px);
+            background: white;
+            border-left-color: #ffb347;
+        }
+        .list-group-item-water h5 {
+            color: #0b5e7e;
+            font-weight: 800;
+        }
+        /* Формы */
+        input, textarea, select {
+            border-radius: 20px !important;
+            border: 1px solid #7fcdff !important;
+            background: #fffef7 !important;
+        }
+        input:focus, textarea:focus {
+            border-color: #ff7e67 !important;
+            box-shadow: 0 0 0 3px rgba(255,126,103,0.2) !important;
+        }
+        /* Футер */
+        .footer-deep {
+            background: #043b4e;
+            color: #bbdef0;
+            margin-top: 50px;
+            padding: 25px 0;
+            border-top: 3px solid #ffb347;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg navbar-marine">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-fish"></i> SharkNews
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#marineNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="marineNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="/news/"><i class="fas fa-water"></i> Новости</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contacts/"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+                {% if user.is_staff or user.is_superuser %}
+                <li class="nav-item"><a class="nav-link" href="/admin/"><i class="fas fa-shield-alt"></i> Админка</a></li>
+                {% endif %}
+            </ul>
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                    <span class="text-warning me-3"><i class="fas fa-user"></i> {{ user.username }}</span>
+                    <a href="/logout/" class="btn btn-outline-light btn-sm">Выход</a>
+                {% else %}
+                    <a href="/login/" class="btn btn-outline-light me-2">Вход</a>
+                    <a href="/register/" class="btn btn-coral">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Основной контент -->
+<div class="container py-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- Футер -->
+<footer class="footer-deep text-center">
+    <div class="container">
+        <p><i class="fas fa-shark"></i> SharkNews — всё о рыбах, акулах и океане</p>
+        <small>© 2026 | Dive into the world of sharks</small>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

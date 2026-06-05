@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Все новости</h1>
+<form method="get" class="mb-3">
+    <input name="search" value="{{ search }}" placeholder="Поиск по названию">
+    <button type="submit">Искать</button>
+    <a href="?sort=asc">Сначала старые</a>
+    <a href="?sort=desc">Сначала новые</a>
+</form>
+{% for item in news %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.pub_date|date:"d.m.Y H:i" }}</p>
+            <a href="/news/{{ item.id }}/">Подробнее</a>
+        </div>
+    </div>
+{% empty %}
+    <p>Новостей не найдено.</p>
+{% endfor %}
+{% endblock %}
